@@ -1,1 +1,1 @@
-​
+Greedy! The core algorithm is greedy. The trick is to use a pos array to record the **last** location of each letter and use visited array to denote whether the letter has been added to results. If the current back element is greater than s[i], and it will appear later, then just greedily pop out and mark it as unvisited.
