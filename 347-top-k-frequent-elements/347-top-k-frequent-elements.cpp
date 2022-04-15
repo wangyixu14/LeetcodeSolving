@@ -12,7 +12,6 @@ public:
             if(pq.size() < k) pq.push(make_pair(m.second, m.first));
             else{
                 if(m.second > pq.top().first){
-                    // cout << m.first << m.second << endl;
                     pq.pop();
                     pq.push(make_pair(m.second, m.first));
                 }
