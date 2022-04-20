@@ -14,17 +14,19 @@ private:
     int ans; 
 public:
     int kthSmallest(TreeNode* root, int k) {
-        helper(root, k);
+        dfs(root, k);
         return ans;
     }
     
-    void helper(TreeNode* root, int &cnt){
-        if(root->left) helper(root->left, cnt);
+    void dfs(TreeNode* root, int& cnt){
+        if(!root) return;
+        dfs(root->left, cnt);
         cnt--;
-        if(!cnt) {
+        if(cnt==0){
             ans = root->val;
             return;
         }
-        if(root->right) helper(root->right, cnt);
+        dfs(root->right, cnt);
     }
+    
 };
