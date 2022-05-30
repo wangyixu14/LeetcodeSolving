@@ -1,1 +1,1 @@
-​
+& | 代表的是bit-wise operation, while && ||是逻辑符号。bitmask其实可以看作是一种特殊的hashmap，不去统计各个元素的个数而是统计是否出现。
