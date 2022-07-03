@@ -1,32 +1,25 @@
 class Solution {
 public:
     int wiggleMaxLength(vector<int>& A) {
-        if(A.size() == 1) return 1;
-        if(A.size() == 2){
-            if(A[0] != A[1]) return 2;
-            else return 1;
-        }
-        vector<vector<int>> dp(A.size(), vector<int>(2, 0));
+        vector<int> up(A.size(), 0);
+        vector<int> down(A.size(), 0);
+        up[0] = 1;
+        down[0] = 1;
         
-        dp[0][0] = 1;
-        dp[0][1] = 1;
-        
-        if(A[1] > A[0]) dp[1][1] = 2;
-        if(A[1] < A[0]) dp[1][0] = 2;
-
-        for(int i = 2; i < A.size(); i++){
-            for(int j = i -1; j >= 0; j--){
-                if(A[j] < A[i]) dp[i][1] = max(dp[i][1], dp[j][0] + 1);
-                if(A[j] > A[i]) dp[i][0] = max(dp[i][0], dp[j][1] + 1);
+        for(int i = 1; i < A.size(); i++){
+            if(A[i] > A[i-1]){
+                up[i] = down[i-1] + 1;
+                down[i] = down[i-1];
+            }
+            else if(A[i] < A[i-1]){
+                up[i] = up[i-1];
+                down[i] = up[i-1] + 1;
+            }
+            else{
+                up[i] = up[i-1];
+                down[i] = down[i-1];                
             }
         }
-        
-        int res = 0;
-        for(auto d:dp){
-            res = max(res, d[0]);
-            res = max(res, d[1]);
-        }
-        
-        return res;
+        return max(up.back(), down.back());
     }
 };
